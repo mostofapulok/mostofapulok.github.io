@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		
+		<title>Transport Tracker</title>
+
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="style.css">
+		
+		<!--[if lt IE 9]>
+		<script src="js/ie-support/html5.js"></script>
+		<script src="js/ie-support/respond.js"></script>
+		<![endif]-->
+
+	</head>
+
+
+	<body>
+		
+		<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="index.html" class="branding">
+						<img src="images/logo.png" alt="" class="logo">
+						<div class="logo-type">
+							<h1 class="site-title">Transport Tracker</h1>
+							<small class="site-description">Online Bus Monitoring System</small>
+						</div>
+					</a>
+
+					<!-- Default snippet for navigation -->
+					<div class="main-navigation">
+						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item"><a href="index.html">Home</a></li>
+							<li class="menu-item"><a href="live-tracking.html">Live Tracking</a></li>
+							<li class="menu-item"><a href="schedule.html">Schedule</a></li>
+							<li class="menu-item current-menu-item"><a href="station-map.html">Station Map</a></li>
+							<li class="menu-item"><a href="contact.html">Contact</a></li>
+						</ul> <!-- .menu -->
+					</div> <!-- .main-navigation -->
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+			</div> <!-- .site-header -->
+
+			<main class="main-content">
+				<div class="container">
+					<div class="breadcrumb">
+						<a href="index.html">Home</a>
+						<span><font size="4px">Station Map</font></span>
+					</div>
+				</div>
+
+				<div class="fullwidth-block">
+				
+					<div class="container">
+					<p> <b><font size="4px">Here the bus stoppage are shown on the map. If the mouse is pointed on the marker then the address of that marker position stoppage will be shown. This address will be shown largely when client click on that marker. </font></b></p>
+					
+					
+					
+						<div class="row">
+						
+							<div id="mapContainer">
+<div id="mapCanvas" style="height: 500px;"></div>
+</div>
+							
+						</div>
+					</div>
+				</div>
+				
+			</main> <!-- .main-content -->
+
+			<footer class="site-footer">
+				<div class="container">
+					<div class="row">
+						
+						<div class="col-md-3 col-md-offset-1">
+							<div class="social-links">
+								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-google-plus"></i></a>
+								<a href="#"><i class="fa fa-pinterest"></i></a>
+							</div>
+						</div>
+					</div>
+
+					<p class="colophon">Copyright 2018 Transport Tracker. Designed by ECE'13. All rights reserved</p>
+				</div>
+			</footer> <!-- .site-footer -->
+		</div>
+		
+		
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpfJuIAy-d9VZKNEZWCVPT9SipL8Epz8E"></script>
+        <script>
+        function initMap() {
+            var map;
+            var bounds = new google.maps.LatLngBounds();
+            var mapOptions = {
+                mapTypeId: 'roadmap'
+            };
+
+            // Display a map on the web page
+            map = new google.maps.Map(document.getElementById("mapCanvas"), mapOptions);
+            map.setTilt(50);
+
+            // Multiple markers location, latitude, and longitude
+            var markers = [
+                ['Academic Building-1', 22.802637, 89.534549],
+                ['Khulna University Main Gate', 22.799536, 89.534648],
+                ['Gollamari Bus Stop', 22.800974, 89.541657],
+                ['Sonadanga Bus Stop', 22.816233, 89.542950],
+                ['Zero Point Bus Stop', 22.798293, 89.528789],
+                ['Shiromoni', 22.914388, 89.503214],
+                ['Moylapota', 22.812839, 89.556937],
+                ['Royal Mor', 22.810258, 89.562249],
+                ['PTI Mor', 22.807933, 89.566293],
+                ['Boyra Bus Stop', 22.835597, 89.532092],
+                ['Nirala', 22.802477, 89.554531],
+                ['Rupsha Bus Stop', 22.801912, 89.578453],
+                ['Nuton Rasta', 22.862903, 89.529747],
+                ['Fulbari gate', 22.897869, 89.510059],
+                ['Dowlatpur', 22.878624, 89.519941],
+
+            ];
+
+            // Info window content
+            var infoWindowContent = [
+                ['<div class="info_content">' + '<h3>Academic Building-1</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Khulna University</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Gollamri Bus Stop</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Sonadanga Bus Stop</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Zero point Bus Stop</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Shiromoni Bus Stop</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Moylapota Bus Stop</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Royal Mor</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>PTI Mor</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Boyra Bus Stop</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Nirala</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Rupsha Bus Stop</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Nuton Rasta</h3>' + '</div>'],
+                ['<div class="info_content">' + '<h2>Fulbari gate</h2>' + '</div>'],
+                ['<div class="info_content">' + '<h3>Dowlatpur</h3>' + '</div>'],
+            ];
+
+            // Add multiple markers to map
+            var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+            // Place each marker on the map  
+            for( i = 0; i < markers.length; i++ ) {
+                var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+                bounds.extend(position);
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: markers[i][0]
+                });
+
+                // Add info window to marker    
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infoWindow.setContent(infoWindowContent[i][0]);
+                        infoWindow.open(map, marker);
+                    }
+                })(marker, i));
+
+                // Center the map to fit all markers on the screen
+                map.fitBounds(bounds);
+            }
+
+            // Set zoom level
+            var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+                this.setZoom(14);
+                google.maps.event.removeListener(boundsListener);
+            });
+
+        }
+        // Load initialize function
+        google.maps.event.addDomListener(window, 'load', initMap);
+        </script>
+		
+		
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/plugins.js"></script>
+		<script src="js/app.js"></script>
+		
+	</body>
+
+</html>
